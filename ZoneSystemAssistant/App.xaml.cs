@@ -14,7 +14,7 @@ namespace ZoneSystemAssistant
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new ItemsPage();
+            MainPage = new NavigationPage(new ItemsPage());
         }
 
         protected override void OnStart()
