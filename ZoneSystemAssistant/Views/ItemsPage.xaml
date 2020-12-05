@@ -11,10 +11,11 @@
     <ContentPage.Resources>
         <!-- Implicit styles -->
         <Style TargetType="{x:Type Label}" x:Key="LabelStyle">
-            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontSize" Value="38" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="White" />
+            <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
         </Style>
     </ContentPage.Resources>
     
@@ -30,31 +31,64 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0" BackgroundColor="Red">
+        <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}">0</Label>
-            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}">I</Label>
-            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}">II</Label>
-            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelStyle}">III</Label>
-            <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelStyle}">IV</Label>
-            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelStyle}">V</Label>
-            <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelStyle}">VI</Label>
-            <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelStyle}">VII</Label>
-            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource LabelStyle}">VIII</Label>
-            <Label Grid.Row="9" Grid.Column="0" Style="{StaticResource LabelStyle}">IX</Label>
-            <Label Grid.Row="10" Grid.Column="0" Style="{StaticResource LabelStyle}">X</Label>
+            <FlexLayout Direction="Row" Grid.Row="0" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#000000" TextColor="#ffffff">0</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="1" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#191919" TextColor="#e6e6e6">I</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="2" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#323232" TextColor="#cccccc">II</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="3" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#4c4c4c" TextColor="#b2b2b2">III</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="4" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#656565" TextColor="#989898">IV</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="5" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#7f7f7f" TextColor="Black">V</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="6" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#989898" TextColor="#656565">VI</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="7" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#b2b2b2" TextColor="#4c4c4c">VII</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="8" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#cccccc" TextColor="#323232">VIII</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="9" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#e6e6e6" TextColor="#191919">IX</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
+            <FlexLayout Direction="Row" Grid.Row="10" Grid.Column="0">
+                <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#ffffff" TextColor="#000000">X</Label>
+                <Image Source="rightarrow.png"></Image>
+            </FlexLayout>
         </Grid>
         <RefreshView Grid.Row="0" Grid.Column="1" Padding="0" Margin="0" BackgroundColor="Blue" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
             <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" Margin="0">
