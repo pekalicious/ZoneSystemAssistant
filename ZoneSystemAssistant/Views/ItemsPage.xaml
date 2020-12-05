@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ZoneSystemAssistant.Views.ItemsPage"
+             Title="{Binding Title}"
+             x:Name="BrowseItemsPage">
+
+    <ContentPage.Resources>
+        <!-- Implicit styles -->
+        <Style TargetType="{x:Type Label}" x:Key="LabelStyle">
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" BackgroundColor="Red">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}">0</Label>
+            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}">I</Label>
+            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}">II</Label>
+            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelStyle}">III</Label>
+            <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelStyle}">IV</Label>
+            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelStyle}">V</Label>
+            <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelStyle}">VI</Label>
+            <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelStyle}">VII</Label>
+            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource LabelStyle}">VIII</Label>
+            <Label Grid.Row="9" Grid.Column="0" Style="{StaticResource LabelStyle}">IX</Label>
+            <Label Grid.Row="10" Grid.Column="0" Style="{StaticResource LabelStyle}">X</Label>
+        </Grid>
+        <RefreshView Grid.Row="0" Grid.Column="1" Padding="0" Margin="0" BackgroundColor="Blue" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+            <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" Margin="0">
+                <d:CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>First Item</x:String>
+                        <x:String>Second Item</x:String>
+                        <x:String>Third Item</x:String>
+                        <x:String>Fourth Item</x:String>
+                        <x:String>Fifth Item</x:String>
+                        <x:String>Sixth Item</x:String>
+                    </x:Array>
+                </d:CollectionView.ItemsSource>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10,0,0,0" ColumnSpacing="0" Margin="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="5*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Text}" 
+                                   d:Text="{Binding .}"
+                                   Grid.Row="0"
+                                   Grid.Column="0"
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="32"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Start"/>
+                            <Label Text="{Binding Description}" 
+                                   d:Text="Item descripton"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="22" 
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Start"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+
+    <!--<RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+        <CollectionView x:Name="ItemsCollectionView"
+                ItemsSource="{Binding Items}">
+            <d:CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>First Item</x:String>
+                    <x:String>Second Item</x:String>
+                    <x:String>Third Item</x:String>
+                    <x:String>Fourth Item</x:String>
+                    <x:String>Fifth Item</x:String>
+                    <x:String>Sixth Item</x:String>
+                </x:Array>
+            </d:CollectionView.ItemsSource>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding Text}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                        <Label Text="{Binding Description}" 
+                                d:Text="Item descripton"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>--> 
+</ContentPage>
