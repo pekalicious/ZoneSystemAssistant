@@ -17,15 +17,18 @@ namespace ZoneSystemAssistant.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Browse";
+            Title = "Zone System Assistant";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "AddItem", async (obj, item) =>
             {
-                var newItem = item as Item;
-                Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                Items.Add(item);
+                await DataStore.AddItemAsync(item);
+            });
+            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "UpdateItem", async (obj, item) =>
+            {
+                await DataStore.UpdateItemAsync(item);
             });
         }
 
@@ -50,6 +53,12 @@ namespace ZoneSystemAssistant.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public async Task ResetItems()
+        {
+            Items.Clear();
+            await DataStore.ClearAll();
         }
     }
 }

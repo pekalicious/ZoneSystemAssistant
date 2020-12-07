@@ -7,11 +7,16 @@
              x:Class="ZoneSystemAssistant.Views.ItemDetailPage"
              Title="{Binding Title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small"/>
+        <Label Text="Reading:" FontSize="Medium" />
+        <Entry x:Name="EvEntry" Keyboard="Numeric" FontSize="Large" />
         <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small"/>
+        <Entry x:Name="DescEntry" d:Text="Item description" FontSize="Large" />
     </StackLayout>
     
 </ContentPage>

@@ -14,10 +14,12 @@ namespace ZoneSystemAssistant.Views
     public partial class ItemDetailPage : ContentPage
     {
         ItemDetailViewModel viewModel;
+        bool isNewItem;
 
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
             InitializeComponent();
+            isNewItem = false;
 
             BindingContext = this.viewModel = viewModel;
         }
@@ -25,15 +27,36 @@ namespace ZoneSystemAssistant.Views
         public ItemDetailPage()
         {
             InitializeComponent();
+            isNewItem = true;
 
             var item = new Item
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Ev = -1,
+                Description = "Shadows"
             };
 
-            viewModel = new ItemDetailViewModel(item);
-            BindingContext = viewModel;
+            BindingContext = this.viewModel = new ItemDetailViewModel(item);
+        }
+
+        async void Save_Clicked(object sender, EventArgs e)
+        {
+            this.viewModel.Item.Ev = int.Parse(EvEntry.Text);
+            this.viewModel.Item.Description = DescEntry.Text;
+
+            if (isNewItem)
+            {
+                MessagingCenter.Send(this, "AddItem", viewModel.Item);
+            }
+            else
+            {
+                MessagingCenter.Send(this, "UpdateItem", viewModel.Item);
+            }
+            await Navigation.PopModalAsync();
+        }
+
+        async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
         }
     }
 }
