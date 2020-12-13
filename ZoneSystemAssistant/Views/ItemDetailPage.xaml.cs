@@ -31,11 +31,18 @@ namespace ZoneSystemAssistant.Views
 
             var item = new Item
             {
-                Ev = -1,
+                Ev = 0,
                 Description = "Shadows"
             };
 
             BindingContext = this.viewModel = new ItemDetailViewModel(item);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            EvEntry.Focus();
         }
 
         async void Save_Clicked(object sender, EventArgs e)
