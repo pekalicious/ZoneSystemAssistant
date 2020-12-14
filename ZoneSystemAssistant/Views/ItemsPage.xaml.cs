@@ -30,8 +30,11 @@ namespace ZoneSystemAssistant.Views
         public async void OnItemSelected(object sender, EventArgs eventArgs)
         {
             var layout = (BindableObject)sender;
-            var item = (ItemViewModel)layout.BindingContext;
-            await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(new ItemDetailViewModel(item.Item))));
+            var itemViewModel = (ItemViewModel)layout.BindingContext;
+            if (itemViewModel.Item is Item item)
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(new ItemDetailViewModel(item))));
+            }
         }
 
         async void Reset_Clicked(object sender, EventArgs e)

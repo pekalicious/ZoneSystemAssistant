@@ -19,16 +19,6 @@ namespace ZoneSystemAssistant.Services
         {
             items = new List<Item>()
             {
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
                 new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""}, // -6
                 new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""}, // -5
                 new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""}, // -4
@@ -57,22 +47,12 @@ namespace ZoneSystemAssistant.Services
                 new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""}, // 19
                 new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""}, // 20
                 new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""}, // 21
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
-                new Item {Id = Guid.NewGuid().ToString(), Ev = -1, Description = ""},
             };
         }
 
         public async Task<bool> AddItemAsync(Item item)
         {
-            int index = item.Ev + 6 + 10;
+            int index = item.Ev + 6;
             var existingItem = items[index];
             existingItem.Ev = item.Ev;
             existingItem.Description += $",{item.Description}";

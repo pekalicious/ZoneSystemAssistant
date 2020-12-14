@@ -7,10 +7,10 @@ namespace ZoneSystemAssistant.ViewModels
 {
     public class ItemViewModel
     {
-        public Item Item { get; private set; }
+        public IItem Item { get; private set; }
         public bool ShowEvReading { get { return Item.Ev > 0; } }
 
-        public ItemViewModel(Item item)
+        public ItemViewModel(IItem item)
         {
             Item = item;
         }

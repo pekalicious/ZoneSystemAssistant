@@ -39,10 +39,18 @@ namespace ZoneSystemAssistant.ViewModels
             try
             {
                 Items.Clear();
+                for (int i = 0; i < 10; i++)
+                {
+                    Items.Add(new ItemViewModel(new MockItem()));
+                }
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
                     Items.Add(new ItemViewModel(item));
+                }
+                for (int i = 0; i < 10; i++)
+                {
+                    Items.Add(new ItemViewModel(new MockItem()));
                 }
             }
             catch (Exception ex)
