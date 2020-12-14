@@ -111,6 +111,42 @@
                             <x:String>Sixth Item</x:String>
                         </x:Array>
                     </d:CollectionView.ItemsSource>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10,0,0,0" ColumnSpacing="0" Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="5*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Item.Ev}" 
+                                   d:Text="{Binding .}"
+                                   Grid.Row="0"
+                                   Grid.Column="0"
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="32"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Start"
+                                   IsVisible="{Binding ShowEvReading}"/>
+                                <Label Text="{Binding Item.Description}" 
+                                   d:Text="Item descripton"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="22" 
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Start"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
         </Grid>

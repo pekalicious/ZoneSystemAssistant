@@ -25,53 +25,13 @@ namespace ZoneSystemAssistant.Views
             InitializeComponent();
 
             BindingContext = viewModel = new ItemsViewModel();
-            ItemsCollectionView.ItemTemplate = new DataTemplate(() =>
-            {
-                Grid grid = new Grid
-                {
-                    Padding = new Thickness(10, 0, 0, 0),
-                    ColumnSpacing = 0,
-                    Margin = 0,
-                    RowDefinitions = new RowDefinitionCollection
-                    {
-                        new RowDefinition() { Height = GridLength.Star }
-                    },
-                    ColumnDefinitions = new ColumnDefinitionCollection
-                    {
-                        new ColumnDefinition() { Width = GridLength.Star }, 
-                        new ColumnDefinition() { Width = new GridLength(5, GridUnitType.Star) }
-                    }
-                };
-                
-                Label evLabel = new Label();
-                evLabel.LineBreakMode = LineBreakMode.NoWrap;
-                //d: Text = "{Binding .}"
-                evLabel.FontSize = 32;
-                evLabel.FontAttributes = FontAttributes.Bold;
-                evLabel.VerticalOptions = LayoutOptions.Center;
-                evLabel.HorizontalTextAlignment = TextAlignment.Start;
-                evLabel.SetBinding(Label.TextProperty, "Ev");
-                grid.Children.Add(evLabel, 0, 0);
-
-                Label descLabel = new Label();
-                //d: Text = "Item descripton"
-                descLabel.SetBinding(Label.TextProperty, "Description");
-                descLabel.LineBreakMode = LineBreakMode.NoWrap;
-                descLabel.FontSize = 22;
-                descLabel.VerticalOptions = LayoutOptions.Center;
-                descLabel.HorizontalTextAlignment = TextAlignment.Start;
-                grid.Children.Add(descLabel, 1, 0);
-
-                grid.GestureRecognizers.Add(new TapGestureRecognizer() { NumberOfTapsRequired = 1, TappedCallback = OnItemSelected });
-                return grid;
-            });
         }
 
-        async void OnItemSelected(View view, object o)
+        public async void OnItemSelected(object sender, EventArgs eventArgs)
         {
-            var layout = (BindableObject)view;
-            var item = (Item)layout.BindingContext;
-            await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(new ItemDetailViewModel(item))));
+            var layout = (BindableObject)sender;
+            var item = (ItemViewModel)layout.BindingContext;
+            await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(new ItemDetailViewModel(item.Item))));
         }
 
         async void Reset_Clicked(object sender, EventArgs e)
