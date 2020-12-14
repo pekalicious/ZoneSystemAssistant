@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -42,17 +42,17 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0" RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="64" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
                 <FlexLayout Direction="Row" Grid.Row="0" Grid.Column="0">
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#000000" TextColor="#ffffff">0</Label>
@@ -113,7 +113,7 @@
                     </d:CollectionView.ItemsSource>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid ColumnSpacing="0" Margin="0" HeightRequest="64">
+                            <Grid ColumnSpacing="0" Margin="0" HeightRequest="52">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
