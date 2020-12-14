@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using ZoneSystemAssistant.ViewModels;
 using Xamarin.Forms;
@@ -40,13 +41,13 @@ namespace ZoneSystemAssistant.ViewModels
                 Items.Clear();
                 for (int i = 0; i < 47; i++)
                 {
-                    Items.Add(new ItemViewModel(new MockItem()));
+                    Items.Add(new ItemViewModel(new MockItem(), i % 2 == 0));
                 }
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
                     var index = item.Ev + 6 + 10;
-                    Items[index] = new ItemViewModel(item);
+                    Items[index] = new ItemViewModel(item, index % 2 == 0);
                 }
             }
             catch (Exception ex)
