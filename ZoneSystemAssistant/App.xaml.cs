@@ -13,6 +13,8 @@ namespace ZoneSystemAssistant
         {
             InitializeComponent();
 
+            Values.Load();
+
             DependencyService.Register<MockDataStore>();
             MainPage = new NavigationPage(new ItemsPage());
         }

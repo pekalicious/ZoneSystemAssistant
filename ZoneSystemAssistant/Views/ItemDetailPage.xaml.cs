@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 using ZoneSystemAssistant.Models;
@@ -19,16 +21,16 @@ namespace ZoneSystemAssistant.Views
 
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
-            InitializeComponent();
             isNewItem = false;
+            InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
         }
 
         public ItemDetailPage()
         {
-            InitializeComponent();
             isNewItem = true;
+            InitializeComponent();
 
             var item = new Item
             {
@@ -44,8 +46,17 @@ namespace ZoneSystemAssistant.Views
         {
             base.OnAppearing();
 
-            await Task.Delay(50);
-            EvEntry.Focus();
+            if (isNewItem)
+            {
+                await Task.Delay(50);
+                EvEntry.Focus();
+            }
+            else
+            {
+                var first = Values.Instance.Ev.First(e => e == viewModel.Item.Ev.ToString());
+                var evEntrySelectedIndex = Values.Instance.Ev.IndexOf(first);
+                EvEntry.SelectedIndex = evEntrySelectedIndex;
+            }
         }
 
         void Save_Clicked(object sender, EventArgs e)
@@ -55,7 +66,7 @@ namespace ZoneSystemAssistant.Views
 
         async void Save()
         {
-            this.viewModel.Item.Ev = int.Parse(EvEntry.Text);
+            this.viewModel.Item.Ev = int.Parse(viewModel.PickerValues[EvEntry.SelectedIndex]);
             this.viewModel.Item.Description = DescEntry.Text;
 
             if (isNewItem)
@@ -82,8 +93,14 @@ namespace ZoneSystemAssistant.Views
 
         private void EvEntry_OnFocused(object sender, FocusEventArgs e)
         {
-            EvEntry.CursorPosition = 0;
-            EvEntry.SelectionLength = EvEntry.Text.Length;
+            //EvEntry.CursorPosition = 0;
+            //EvEntry.SelectionLength = EvEntry.Text.Length;
+        }
+
+        private async void EvEntry_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            await Task.Delay(80);
+            DescEntry.Focus();
         }
     }
 }
