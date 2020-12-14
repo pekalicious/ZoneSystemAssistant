@@ -2,7 +2,7 @@
 
 namespace ZoneSystemAssistant.Models
 {
-    public class Item
+    public class Item : IItem
     {
         public string Id { get; set; }
         public int Ev { get; set; }
