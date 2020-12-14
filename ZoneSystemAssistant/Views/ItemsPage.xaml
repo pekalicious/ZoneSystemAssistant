@@ -11,11 +11,11 @@
     <ContentPage.Resources>
         <!-- Implicit styles -->
         <Style TargetType="{x:Type Label}" x:Key="LabelStyle">
-            <Setter Property="FontSize" Value="38" />
+            <Setter Property="FontSize" Value="32" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="White" />
-            <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalTextAlignment" Value="Center" />
         </Style>
     </ContentPage.Resources>
 
@@ -42,17 +42,17 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0" RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="64" />
                 </Grid.RowDefinitions>
                 <FlexLayout Direction="Row" Grid.Row="0" Grid.Column="0">
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#000000" TextColor="#ffffff">0</Label>
@@ -113,18 +113,25 @@
                     </d:CollectionView.ItemsSource>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="10,0,0,0" ColumnSpacing="0" Margin="0">
+                            <Grid ColumnSpacing="0" Margin="0" HeightRequest="64">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="43"/>
+                                    <ColumnDefinition Width="43" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
+                                <Image Source="leftarrow.png"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    
+                                    Margin="0,0,6,0"
+                                    />
                                 <Label Text="{Binding Item.Ev}" 
                                    d:Text="{Binding .}"
                                    Grid.Row="0"
-                                   Grid.Column="0"
+                                   Grid.Column="1"
                                    LineBreakMode="NoWrap" 
                                    Style="{DynamicResource ListItemTextStyle}" 
                                    FontSize="32"
@@ -135,7 +142,7 @@
                                 <Label Text="{Binding Item.Description}" 
                                    d:Text="Item descripton"
                                    Grid.Row="0"
-                                   Grid.Column="1"
+                                   Grid.Column="2"
                                    LineBreakMode="NoWrap"
                                    Style="{DynamicResource ListItemDetailTextStyle}"
                                    FontSize="22" 
