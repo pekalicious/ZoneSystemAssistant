@@ -101,6 +101,9 @@
             </Grid>
             <RefreshView Grid.Row="0" Grid.Column="1" Padding="0" Margin="0" BackgroundColor="Blue" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
                 <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" Margin="0" SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" SnapPointsType="Mandatory" SnapPointsAlignment="Start" />
+                    </CollectionView.ItemsLayout>
                     <d:CollectionView.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>First Item</x:String>
