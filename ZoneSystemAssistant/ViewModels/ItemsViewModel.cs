@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using ZoneSystemAssistant.ViewModels;
 using Xamarin.Forms;
 
 using ZoneSystemAssistant.Models;
@@ -12,18 +12,18 @@ namespace ZoneSystemAssistant.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<ItemViewModel> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Zone System Assistant";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableCollection<ItemViewModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "AddItem", async (obj, item) =>
             {
-                Items.Add(item);
+                Items.Add(new ItemViewModel(item));
                 await DataStore.AddItemAsync(item);
             });
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "UpdateItem", async (obj, item) =>
@@ -42,7 +42,7 @@ namespace ZoneSystemAssistant.ViewModels
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
-                    Items.Add(item);
+                    Items.Add(new ItemViewModel(item));
                 }
             }
             catch (Exception ex)
