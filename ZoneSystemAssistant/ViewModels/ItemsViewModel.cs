@@ -23,7 +23,6 @@ namespace ZoneSystemAssistant.ViewModels
 
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "AddItem", async (obj, item) =>
             {
-                Items.Add(new ItemViewModel(item));
                 await DataStore.AddItemAsync(item);
             });
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "UpdateItem", async (obj, item) =>
