@@ -20,6 +20,8 @@ namespace ZoneSystemAssistant.Views
     {
         ItemsViewModel viewModel;
 
+        private static bool firstTime = true;
+
         public ItemsPage()
         {
             InitializeComponent();
@@ -52,6 +54,16 @@ namespace ZoneSystemAssistant.Views
             base.OnAppearing();
 
             await viewModel.ExecuteLoadItemsCommand();
+
+            if (firstTime)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Task.Delay(50);
+                    ItemsCollectionView.ScrollTo(viewModel.Items[15], -1, ScrollToPosition.Start, false);
+                    firstTime = false;
+                });
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -100,7 +100,7 @@
                 </FlexLayout>
             </Grid>
             <RefreshView Grid.Row="0" Grid.Column="1" Padding="0" Margin="0" BackgroundColor="Blue" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
-                <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" Margin="0">
+                <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" Margin="0" SelectionMode="Single">
                     <d:CollectionView.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>First Item</x:String>
