@@ -12,11 +12,6 @@ namespace ZoneSystemAssistant.Services
 
         public MockDataStore()
         {
-            InitializeWithRandomItems();
-        }
-
-        private void InitializeWithRandomItems()
-        {
             items = new List<Item>()
             {
                 new Item {Id = Guid.NewGuid().ToString(), Ev = 3, Description = "Shadows"},
@@ -63,7 +58,7 @@ namespace ZoneSystemAssistant.Services
 
         public async Task<bool> ClearAll()
         {
-            InitializeWithRandomItems();
+            items.Clear();
             return await Task.FromResult(true);
         }
 

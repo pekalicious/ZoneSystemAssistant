@@ -42,6 +42,13 @@ namespace ZoneSystemAssistant.Views
         async void Reset_Clicked(object sender, EventArgs e)
         {
             await viewModel.ResetItems();
+            await viewModel.ExecuteLoadItemsCommand();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await Task.Delay(50);
+                ItemsCollectionView.ScrollTo(viewModel.Items[15], -1, ScrollToPosition.Start, false);
+                firstTime = false;
+            });
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
