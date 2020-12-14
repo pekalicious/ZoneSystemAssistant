@@ -32,25 +32,22 @@ namespace ZoneSystemAssistant.ViewModels
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        public async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
             try
             {
                 Items.Clear();
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 47; i++)
                 {
                     Items.Add(new ItemViewModel(new MockItem()));
                 }
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
-                    Items.Add(new ItemViewModel(item));
-                }
-                for (int i = 0; i < 10; i++)
-                {
-                    Items.Add(new ItemViewModel(new MockItem()));
+                    var index = item.Ev + 6 + 10;
+                    Items[index] = new ItemViewModel(item);
                 }
             }
             catch (Exception ex)

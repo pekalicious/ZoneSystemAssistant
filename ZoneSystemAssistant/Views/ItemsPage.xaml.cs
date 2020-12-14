@@ -31,7 +31,7 @@ namespace ZoneSystemAssistant.Views
         {
             var layout = (BindableObject)sender;
             var itemViewModel = (ItemViewModel)layout.BindingContext;
-            if (itemViewModel.Item is Item item)
+            if (itemViewModel.ShowEvReading && itemViewModel.Item is Item item)
             {
                 await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(new ItemDetailViewModel(item))));
             }
@@ -47,12 +47,11 @@ namespace ZoneSystemAssistant.Views
             await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage()));
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.IsBusy = true;
+            await viewModel.ExecuteLoadItemsCommand();
         }
     }
 }
