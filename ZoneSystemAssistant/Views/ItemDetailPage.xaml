@@ -14,9 +14,9 @@
     
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Reading:" FontSize="Medium" />
-        <Entry Text="{Binding Item.Ev}"  x:Name="EvEntry" Keyboard="Numeric" FontSize="Large" />
+        <Entry Text="{Binding Item.Ev}"  x:Name="EvEntry" Keyboard="Numeric" FontSize="Large" ReturnType="Next" Focused="EvEntry_OnFocused" />
         <Label Text="Description:" FontSize="Medium" />
-        <Entry Text="{Binding Item.Description}"  x:Name="DescEntry" d:Text="Item description" FontSize="Large" />
+        <Entry Text="{Binding Item.Description}"  x:Name="DescEntry" d:Text="Item description" FontSize="Large" ReturnType="Done" Focused="DescEntry_OnFocused" />
     </StackLayout>
     
 </ContentPage>

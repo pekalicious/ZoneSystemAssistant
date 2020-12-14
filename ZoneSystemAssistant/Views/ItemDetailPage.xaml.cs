@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,16 +37,23 @@ namespace ZoneSystemAssistant.Views
             };
 
             BindingContext = this.viewModel = new ItemDetailViewModel(item);
+            DescEntry.ReturnCommand = new Command(() => Save());
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
+            await Task.Delay(50);
             EvEntry.Focus();
         }
 
-        async void Save_Clicked(object sender, EventArgs e)
+        void Save_Clicked(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        async void Save()
         {
             this.viewModel.Item.Ev = int.Parse(EvEntry.Text);
             this.viewModel.Item.Description = DescEntry.Text;
@@ -64,6 +72,18 @@ namespace ZoneSystemAssistant.Views
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+        }
+
+        private void DescEntry_OnFocused(object sender, FocusEventArgs e)
+        {
+            DescEntry.CursorPosition = 0;
+            DescEntry.SelectionLength = DescEntry.Text.Length;
+        }
+
+        private void EvEntry_OnFocused(object sender, FocusEventArgs e)
+        {
+            EvEntry.CursorPosition = 0;
+            EvEntry.SelectionLength = EvEntry.Text.Length;
         }
     }
 }
