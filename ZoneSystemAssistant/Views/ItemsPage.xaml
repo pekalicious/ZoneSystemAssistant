@@ -36,7 +36,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Clear" Clicked="Reset_Clicked" />
+        <ToolbarItem Text="Reset" Clicked="Reset_Clicked" />
     </ContentPage.ToolbarItems>
 
     <Grid RowSpacing="0" ColumnSpacing="0">

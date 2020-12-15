@@ -67,8 +67,12 @@ namespace ZoneSystemAssistant.ViewModels
 
         public async Task ResetItems()
         {
-            Items.Clear();
-            await DataStore.ClearAll();
+            //Items.Clear();
+            //await DataStore.ClearAll();
+            foreach (var item in Items)
+            {
+                item.Reset();
+            }
         }
     }
 }

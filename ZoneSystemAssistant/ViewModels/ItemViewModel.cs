@@ -41,8 +41,7 @@ namespace ZoneSystemAssistant.ViewModels
             this.isEven = isEven;
 
             Item = item;
-            ValueStyle = (Style)page.Resources["ValueOff"];
-            UpdateBgColor();
+            Reset();
         }
 
         private void UpdateBgColor()
@@ -63,8 +62,18 @@ namespace ZoneSystemAssistant.ViewModels
 
         public void Toggle()
         {
-            IsTapped = !IsTapped;
-            ValueStyle = (Style) (IsTapped ? page.Resources["ValueOn"] : page.Resources["ValueOff"]);
+            SetState(!IsTapped);
+        }
+
+        public void Reset()
+        {
+            SetState(false);
+        }
+
+        private void SetState(bool newState)
+        {
+            IsTapped = newState;
+            ValueStyle = (Style)(IsTapped ? page.Resources["ValueOn"] : page.Resources["ValueOff"]);
             UpdateBgColor();
         }
     }
