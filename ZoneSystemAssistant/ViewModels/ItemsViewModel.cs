@@ -13,11 +13,13 @@ namespace ZoneSystemAssistant.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
+        private readonly Page page;
         public ObservableCollection<ItemViewModel> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public ItemsViewModel(Page page)
         {
+            this.page = page;
             Title = "Zone System Assistant";
             Items = new ObservableCollection<ItemViewModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -39,15 +41,18 @@ namespace ZoneSystemAssistant.ViewModels
             try
             {
                 Items.Clear();
-                for (int i = 0; i < 47; i++)
+                int j = 0;
+                for (int i = 0; i < 10; i++)
                 {
-                    Items.Add(new ItemViewModel(new MockItem(), i % 2 == 0));
+                    Items.Add(new ItemViewModel(page, new MockItem(), j++ % 2 == 0));
                 }
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                foreach (var evValue in Values.Instance.Ev)
                 {
-                    var index = item.Ev + 6 + 10;
-                    Items[index] = new ItemViewModel(item, index % 2 == 0);
+                    Items.Add(new ItemViewModel(page, new Item() { Ev = int.Parse(evValue) }, j++ % 2 == 0));
+                }
+                for (int i = 0; i < 10; i++)
+                {
+                    Items.Add(new ItemViewModel(page, new MockItem(), j++ % 2 == 0));
                 }
             }
             catch (Exception ex)

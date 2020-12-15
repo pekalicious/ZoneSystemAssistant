@@ -26,16 +26,17 @@ namespace ZoneSystemAssistant.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new ItemsViewModel(this);
         }
 
         public async void OnItemSelected(object sender, EventArgs eventArgs)
         {
             var layout = (BindableObject)sender;
             var itemViewModel = (ItemViewModel)layout.BindingContext;
-            if (itemViewModel.ShowEvReading && itemViewModel.Item is Item item)
+            if (itemViewModel.Item is Item item)
             {
-                await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(new ItemDetailViewModel(item))));
+                //await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(new ItemDetailViewModel(item))));
+                itemViewModel.Toggle();
             }
         }
 

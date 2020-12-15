@@ -6,16 +6,52 @@ using ZoneSystemAssistant.Models;
 
 namespace ZoneSystemAssistant.ViewModels
 {
-    public class ItemViewModel
+    public class ItemViewModel : BaseViewModel
     {
-        public IItem Item { get; private set; }
-        public bool ShowEvReading { get { return Item.Ev > 0; } }
-        public Color Color { get; private set; }
+        public IItem Item { get; }
+        public bool ShowEvReading => Item is Item;
 
-        public ItemViewModel(IItem item, bool isEven)
+        public Color Color
         {
+            get => color;
+            set { SetProperty(ref color, value); }
+        }
+
+        public Style ValueStyle
+        {
+            get => valueStyle;
+            set { SetProperty(ref valueStyle, value); }
+        }
+
+        public bool IsTapped
+        {
+            get => isTapped;
+            private set { SetProperty(ref isTapped, value); }
+        }
+
+        private readonly Page page;
+        private readonly bool isEven;
+        private bool isTapped;
+        private Style valueStyle;
+        private Color color;
+
+        public ItemViewModel(Page page, IItem item, bool isEven)
+        {
+            this.page = page;
+            this.isEven = isEven;
+
             Item = item;
-            if (isEven)
+            ValueStyle = (Style)page.Resources["ValueOff"];
+            UpdateBgColor();
+        }
+
+        private void UpdateBgColor()
+        {
+            if (IsTapped)
+            {
+                Color = Color.Black;
+            }
+            else if (isEven)
             {
                 Color = Color.White;
             }
@@ -23,6 +59,13 @@ namespace ZoneSystemAssistant.ViewModels
             {
                 Color = new Color(0.95, 0.95, 0.95);
             }
+        }
+
+        public void Toggle()
+        {
+            IsTapped = !IsTapped;
+            ValueStyle = (Style) (IsTapped ? page.Resources["ValueOn"] : page.Resources["ValueOff"]);
+            UpdateBgColor();
         }
     }
 }
