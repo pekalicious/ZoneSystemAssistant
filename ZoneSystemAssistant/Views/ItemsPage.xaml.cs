@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using ZoneSystemAssistant.Services;
 using ZoneSystemAssistant.ViewModels;
 
 namespace ZoneSystemAssistant.Views
@@ -16,9 +16,11 @@ namespace ZoneSystemAssistant.Views
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
+        private IUserPrefsStore UserPrefs => DependencyService.Get<IUserPrefsStore>();
         ItemsViewModel viewModel;
 
         private static bool firstTime = true;
+        private ValueMode currentMode;
 
         public ItemsPage()
         {
@@ -39,8 +41,13 @@ namespace ZoneSystemAssistant.Views
 
         async void Reset_Clicked(object sender, EventArgs e)
         {
+            await ResetEverything();
+        }
+
+        private async Task ResetEverything()
+        {
             await viewModel.ResetItems();
-            await viewModel.ExecuteLoadItemsCommand();
+            await viewModel.ExecuteLoadItemsCommand(this.currentMode);
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await Task.Delay(50);
@@ -53,17 +60,32 @@ namespace ZoneSystemAssistant.Views
         {
             base.OnAppearing();
 
-            await viewModel.ExecuteLoadItemsCommand();
-
             if (firstTime)
             {
+                firstTime = false;
+
+                this.currentMode = UserPrefs.Mode;
+                await viewModel.ExecuteLoadItemsCommand(this.currentMode);
+
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await Task.Delay(50);
                     ItemsCollectionView.ScrollTo(viewModel.Items[15], -1, ScrollToPosition.Start, false);
-                    firstTime = false;
                 });
             }
+            else
+            {
+                if (this.currentMode != UserPrefs.Mode)
+                {
+                    this.currentMode = UserPrefs.Mode;
+                    await ResetEverything();
+                }
+            }
+        }
+
+        private void Config_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new NavigationPage(new PrefsPage()));
         }
     }
 }

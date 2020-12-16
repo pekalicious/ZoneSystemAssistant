@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ZoneSystemAssistant.ViewModels;
 using Xamarin.Forms;
-
+using ZoneSystemAssistant.Services;
 using ZoneSystemAssistant.Views;
 
 namespace ZoneSystemAssistant.ViewModels
@@ -14,17 +15,15 @@ namespace ZoneSystemAssistant.ViewModels
     {
         private readonly Page page;
         public ObservableCollection<ItemViewModel> Items { get; set; }
-        public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel(Page page)
         {
             this.page = page;
             Title = "Zone System Assistant";
             Items = new ObservableCollection<ItemViewModel>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-        public async Task ExecuteLoadItemsCommand()
+        public async Task ExecuteLoadItemsCommand(ValueMode mode)
         {
             IsBusy = true;
 
@@ -36,9 +35,9 @@ namespace ZoneSystemAssistant.ViewModels
                 {
                     Items.Add(new ItemViewModel(page, j++ % 2 == 0));
                 }
-                foreach (var evValue in Values.Instance.Ev)
+                foreach (string value in GetValuesBasedOnUserPrefs(mode))
                 {
-                    Items.Add(new ItemViewModel(page, j++ % 2 == 0, evValue));
+                    Items.Add(new ItemViewModel(page, j++ % 2 == 0, value));
                 }
                 for (int i = 0; i < 10; i++)
                 {
@@ -53,6 +52,18 @@ namespace ZoneSystemAssistant.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private List<string> GetValuesBasedOnUserPrefs(ValueMode mode)
+        {
+            switch (mode)
+            {
+                case ValueMode.Ev: return Values.Instance.Ev.ToList();
+                case ValueMode.ShutterSpeed: return Values.Instance.ShutterSpeeds.ToList();
+                case ValueMode.Aperture: return Values.Instance.Apertures.ToList();
+            }
+
+            return Values.Instance.Ev.ToList();
         }
 
         public async Task ResetItems()

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-//using ZoneSystemAssistant.Services;
+using ZoneSystemAssistant.Services;
 using ZoneSystemAssistant.Views;
 
 namespace ZoneSystemAssistant
@@ -15,7 +15,7 @@ namespace ZoneSystemAssistant
 
             Values.Load();
 
-            //DependencyService.Register<MockDataStore>();
+            DependencyService.Register<UniversalUserPrefsStore>();
             MainPage = new NavigationPage(new ItemsPage());
         }
 
