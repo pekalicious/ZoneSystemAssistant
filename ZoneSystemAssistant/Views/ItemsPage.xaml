@@ -27,12 +27,6 @@
             <Setter Property="TextColor" Value="DarkGray" />
             <Setter Property="FontAttributes" Value="None" />
         </Style>
-        <Style TargetType="{x:Type Label}" x:Key="DescOn">
-
-        </Style>
-        <Style TargetType="{x:Type Label}" x:Key="DescOff">
-
-        </Style>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
@@ -43,7 +37,6 @@
     <Grid RowSpacing="0" ColumnSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="64" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -71,100 +64,103 @@
                     <RowDefinition Height="52" />
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
-                <FlexLayout Direction="Row" Grid.Row="0" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="0">
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#000000" TextColor="#ffffff">0</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="1" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="1">
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#191919" TextColor="#e6e6e6">I</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="2" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="2">
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#323232" TextColor="#cccccc">II</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="3" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="3">
+                    <BoxView BackgroundColor="YellowGreen" WidthRequest="10"/>
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#4c4c4c" TextColor="#b2b2b2">III</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="4" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="4">
+                    <BoxView BackgroundColor="YellowGreen" WidthRequest="10"/>
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#656565" TextColor="#989898">IV</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="5" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="5">
+                    <BoxView BackgroundColor="Yellow" WidthRequest="10"/>
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#7f7f7f" TextColor="Black">V</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="6" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="6">
+                    <BoxView BackgroundColor="YellowGreen" WidthRequest="10"/>
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#989898" TextColor="#656565">VI</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="7" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="7">
+                    <BoxView BackgroundColor="YellowGreen" WidthRequest="10"/>
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#b2b2b2" TextColor="#4c4c4c">VII</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="8" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="8">
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#cccccc" TextColor="#323232">VIII</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="9" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="9">
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#e6e6e6" TextColor="#191919">IX</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
-                <FlexLayout Direction="Row" Grid.Row="10" Grid.Column="0">
+                <FlexLayout Direction="Row" Grid.Row="10">
                     <Label FlexLayout.Grow="1" Style="{StaticResource LabelStyle}" BackgroundColor="#ffffff" TextColor="#000000">X</Label>
                     <Image Source="rightarrow.png"></Image>
                 </FlexLayout>
             </Grid>
-            <!--<RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">-->
-                <CollectionView Grid.Row="0" Grid.Column="1" x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" Margin="0" SelectionMode="Single">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" SnapPointsType="Mandatory" SnapPointsAlignment="Start" />
-                    </CollectionView.ItemsLayout>
-                    <d:CollectionView.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>First Item</x:String>
-                            <x:String>Second Item</x:String>
-                            <x:String>Third Item</x:String>
-                            <x:String>Fourth Item</x:String>
-                            <x:String>Fifth Item</x:String>
-                            <x:String>Sixth Item</x:String>
-                        </x:Array>
-                    </d:CollectionView.ItemsSource>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid ColumnSpacing="0" Margin="0" HeightRequest="52">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="43"/>
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="leftarrow.png"
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    IsVisible="{Binding ShowEvReading}"
-                                    Margin="0,0,6,0"
-                                    />
-                                <Label Text="{Binding Value}" 
-                                   d:Text="{Binding .}"
-                                   Padding="10,0,0,0"
-                                   BackgroundColor="{Binding Color}"
-                                   Grid.Row="0"
-                                   Grid.Column="1"
-                                   Style="{Binding ValueStyle}"
-                                   VerticalOptions="Center"
-                                   HorizontalTextAlignment="Start"
-                                   IsVisible="{Binding ShowEvReading}"/>
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
-                                </Grid.GestureRecognizers>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            <!--</RefreshView>-->
+            <CollectionView Grid.Row="0" Grid.Column="1" x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" Margin="0" SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" SnapPointsType="Mandatory" SnapPointsAlignment="Start" />
+                </CollectionView.ItemsLayout>
+                <d:CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>First Item</x:String>
+                        <x:String>Second Item</x:String>
+                        <x:String>Third Item</x:String>
+                        <x:String>Fourth Item</x:String>
+                        <x:String>Fifth Item</x:String>
+                        <x:String>Sixth Item</x:String>
+                    </x:Array>
+                </d:CollectionView.ItemsSource>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="0" Margin="0" HeightRequest="52">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="43"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="leftarrow.png"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                IsVisible="{Binding ShowEvReading}"
+                                Margin="0,0,6,0"
+                                />
+                            <Label Text="{Binding Value}" 
+                               d:Text="{Binding .}"
+                               Padding="10,0,0,0"
+                               BackgroundColor="{Binding Color}"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               Style="{Binding ValueStyle}"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Start"
+                               IsVisible="{Binding ShowEvReading}"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </Grid>
 </ContentPage>
