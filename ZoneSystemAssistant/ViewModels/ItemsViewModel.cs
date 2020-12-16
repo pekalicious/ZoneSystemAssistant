@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using ZoneSystemAssistant.ViewModels;
 using Xamarin.Forms;
 
-using ZoneSystemAssistant.Models;
 using ZoneSystemAssistant.Views;
 
 namespace ZoneSystemAssistant.ViewModels
@@ -23,15 +22,6 @@ namespace ZoneSystemAssistant.ViewModels
             Title = "Zone System Assistant";
             Items = new ObservableCollection<ItemViewModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "AddItem", async (obj, item) =>
-            {
-                await DataStore.AddItemAsync(item);
-            });
-            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "UpdateItem", async (obj, item) =>
-            {
-                await DataStore.UpdateItemAsync(item);
-            });
         }
 
         public async Task ExecuteLoadItemsCommand()
@@ -44,15 +34,15 @@ namespace ZoneSystemAssistant.ViewModels
                 int j = 0;
                 for (int i = 0; i < 10; i++)
                 {
-                    Items.Add(new ItemViewModel(page, new MockItem(), j++ % 2 == 0));
+                    Items.Add(new ItemViewModel(page, j++ % 2 == 0));
                 }
                 foreach (var evValue in Values.Instance.Ev)
                 {
-                    Items.Add(new ItemViewModel(page, new Item() { Ev = int.Parse(evValue) }, j++ % 2 == 0));
+                    Items.Add(new ItemViewModel(page, j++ % 2 == 0, evValue));
                 }
                 for (int i = 0; i < 10; i++)
                 {
-                    Items.Add(new ItemViewModel(page, new MockItem(), j++ % 2 == 0));
+                    Items.Add(new ItemViewModel(page, j++ % 2 == 0));
                 }
             }
             catch (Exception ex)

@@ -7,14 +7,10 @@ using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
 
-using ZoneSystemAssistant.Models;
-using ZoneSystemAssistant.Services;
-
 namespace ZoneSystemAssistant.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         readonly IDictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();

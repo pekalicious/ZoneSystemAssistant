@@ -53,8 +53,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="6*" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0" RowSpacing="0">
                 <Grid.RowDefinitions>
@@ -146,7 +146,7 @@
                                     IsVisible="{Binding ShowEvReading}"
                                     Margin="0,0,6,0"
                                     />
-                                <Label Text="{Binding Item.Ev}" 
+                                <Label Text="{Binding Value}" 
                                    d:Text="{Binding .}"
                                    Padding="10,0,0,0"
                                    BackgroundColor="{Binding Color}"
@@ -165,9 +165,5 @@
                 </CollectionView>
             <!--</RefreshView>-->
         </Grid>
-
-        <FlexLayout Grid.Column="0" Grid.Row="1" BackgroundColor="Black">
-            <Button Clicked="AddItem_Clicked" Text="Add" TextColor="White" BackgroundColor="DimGray" Margin="4"></Button>
-        </FlexLayout>
     </Grid>
 </ContentPage>

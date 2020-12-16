@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using ZoneSystemAssistant.Models;
-using ZoneSystemAssistant.Views;
 using ZoneSystemAssistant.ViewModels;
 
 namespace ZoneSystemAssistant.Views
@@ -33,9 +31,8 @@ namespace ZoneSystemAssistant.Views
         {
             var layout = (BindableObject)sender;
             var itemViewModel = (ItemViewModel)layout.BindingContext;
-            if (itemViewModel.Item is Item item)
+            if (itemViewModel.IsValue)
             {
-                //await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(new ItemDetailViewModel(item))));
                 itemViewModel.Toggle();
             }
         }
@@ -50,11 +47,6 @@ namespace ZoneSystemAssistant.Views
                 ItemsCollectionView.ScrollTo(viewModel.Items[15], -1, ScrollToPosition.Start, false);
                 firstTime = false;
             });
-        }
-
-        async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage()));
         }
 
         protected override async void OnAppearing()

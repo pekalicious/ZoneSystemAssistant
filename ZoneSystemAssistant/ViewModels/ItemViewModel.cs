@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
-using ZoneSystemAssistant.Models;
 
 namespace ZoneSystemAssistant.ViewModels
 {
     public class ItemViewModel : BaseViewModel
     {
-        public IItem Item { get; }
-        public bool ShowEvReading => Item is Item;
+        public string Value { get; private set; }
+        public bool IsValue => Value != null;
+        public bool ShowEvReading => IsValue;
 
         public Color Color
         {
@@ -35,12 +35,12 @@ namespace ZoneSystemAssistant.ViewModels
         private Style valueStyle;
         private Color color;
 
-        public ItemViewModel(Page page, IItem item, bool isEven)
+        public ItemViewModel(Page page, bool isEven, string value = null)
         {
             this.page = page;
             this.isEven = isEven;
+            this.Value = value;
 
-            Item = item;
             Reset();
         }
 
